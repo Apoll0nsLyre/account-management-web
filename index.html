@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js" defer></script>
+    <title>Management webapp</title>
+</head>
+<body>
+
+    <div class="main-page">
+        <h1 class="main-title">Bank account</h1>
+        <div class="account-container">
+            <div class="account">
+                <div class="account-info">
+                    <p class="balance">Balance:</p>
+                </div>
+            </div>
+            <div class="transactions-container">
+                <h2>Recent transactions</h2>
+                
+                <button class="add-button modal-trigger" id="addButton">Add transactions</button>
+                <div class="modal-container">
+                    <div class="overlay modal-trigger"></div>
+                        <div class="modal" role="dialog" aria-labelledby="modalTitle">
+                            <button class="close-modal modal-trigger" aria-label="closeModal">X</button>
+                            <h1 class="modal-title">Adding a transaction</h1>
+                            <form action="" method="">
+                                <div class="modal-input">
+                                    <label for="date">Date</label>
+                                    <input type="date" name="date" id="date" required>
+                                </div>
+                                <div class="modal-input">
+                                    <label for="amount">Amount</label>
+                                    <input type="number" name="amount" id="amount" required>
+                                </div>
+                                <div class="modal-input">
+                                    <label for="description">Description</label>
+                                    <input type="text" name="description" id="description" required>
+                                </div>
+                                <div class="modal-input">
+                                    <label for="user">Type</label>
+                                    <input type="text" name="type" id="type" required>
+                                </div>
+                                <div class="modal-input">
+                                    <button type="submit" class="submit-transaction" id="submit">Add transaction</button>
+                                </div>
+                        </div>
+                </div>
+                <div class="transactions-list-container">
+                    <div class="grid-transaction">
+                        <p>Date</p>
+                        <p>Amount</p>
+                        <p>Description</p>
+                        <p>Type</p>
+                        <div class="transaction-date" id="date"></div>
+                        
+                        <div class="transaction-amount" id="amount"></div>
+                        
+                        <div class="transaction-description" id="description"></div>
+                        
+                        <div class="transaction-type" id="type"></div>
+                    </div>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
