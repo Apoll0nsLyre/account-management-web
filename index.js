@@ -1,15 +1,30 @@
-const addButton = document.getElementById("addButton");
 const modalContainer = document.querySelector(".modal-container");
-const modalTriggers = document.querySelectorAll(".modal-trigger");
-const submitButton = document.querySelector(".submit-transaction");
-const input = document.querySelectorAll("input");
-
+const transactionForm = modalContainer.querySelector("form");
+const transactionListElement = document.querySelector(".grid-transaction");
 const transactionDate = document.querySelector(".transaction-date");
 const transactionAmount = document.querySelector(".transaction-amount");
 const transactionDescription = document.querySelector(".transaction-description");
 const transactionType = document.querySelector(".transaction-type");
+const addButton = document.getElementById("addButton");
+const modalTriggers = document.querySelectorAll(".modal-trigger");
+const balance = document.querySelector(".balance-amount");
+let balanceAmount = 0;
 
-let transactionList = [];
+function deleteTransaction(e) {
+    const transaction = e.target.parentElement;
+}
+
+
+function updateBalance() {
+    for (const transaction of transactions) {
+        balanceAmount += parseInt(transaction.amount);
+    }
+    if (balanceAmount >= 0) {
+        balance.textContent = `+${balanceAmount}€`;
+    }else {
+        balance.textContent = `-${balanceAmount}€`;
+    }
+}
 
 modalTriggers.forEach(trigger => trigger.addEventListener("click", toggleModal));
 
@@ -17,102 +32,92 @@ function toggleModal() {
     modalContainer.classList.toggle("active");
 }
 
-submitButton.addEventListener("click", addTransaction);
-submitButton.addEventListener("click", toggleModal);
+let transactions = [];
 
-function addTransaction(e) {
-    e.preventDefault();
-    const transaction = {
-        date: document.getElementById('date').value,
-        amount: document.getElementById('amount').value,
-        description: document.getElementById('description').value,
-        type: document.getElementById('type').value
+// Charge les transactions enregistrées dans le localStorage
+function loadTransactions() {
+    const savedTransactions = localStorage.getItem("transactions");
+    if (savedTransactions) {
+        transactions = JSON.parse(savedTransactions);
+        renderTransactions();
     }
-    transactionList.push(transaction);
-    saveTransaction();
-    // Effacer les éléments existants pour éviter la duplication
+    updateBalance();
+}
+
+// Enregistre les transactions dans le localStorage
+function saveTransactions() {
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+}
+
+// Ajoute une transaction à la liste des transactions
+function addTransaction(transaction) {
+    transactions.push(transaction);
+    saveTransactions();
+    renderTransactions();
+}
+
+// Affiche les transactions dans le DOM
+function renderTransactions() {
+    // Efface les transactions existantes
     clearTransactionElements();
 
-    // Ajouter toutes les transactions à la liste
-    transactionList.forEach(dataList => {
-        let spanDate = document.createElement("span");
-        let spanAmount = document.createElement("span");
-        let spanDescription = document.createElement("span");
-        let spanType = document.createElement("span");
+    // Ajoute chaque transaction à la liste
+    for (const transaction of transactions) {
+        const dateElement = document.createElement("span");
+        dateElement.textContent = transaction.date;
+        transactionDate.appendChild(dateElement);
 
-        spanDate.innerHTML += dataList.date;
-        spanAmount.innerHTML += dataList.amount;
-        spanDescription.innerHTML += dataList.description;
-        spanType.innerHTML += dataList.type;
+        const amountElement = document.createElement("span");
+        amountElement.textContent = transaction.amount;
+        transactionAmount.appendChild(amountElement);
 
-        transactionDate.appendChild(spanDate);
-        transactionAmount.appendChild(spanAmount);
-        transactionDescription.appendChild(spanDescription);
-        transactionType.appendChild(spanType);
-    });
-    clearValues();
-}
+        const descriptionElement = document.createElement("span");
+        descriptionElement.textContent = transaction.description;
+        transactionDescription.appendChild(descriptionElement);
 
-function saveTransaction() {
-    for (let i = 0; i < transactionList.length; i++) {
-        for (let key in transactionList[i]) {
-            if (transactionList[i][key] === "") {
-                return;
-            }
-            
-        }
-    }
-    localStorage.setItem("transactionList", JSON.stringify(transactionList));
-}
-
-function loadTransactions() {
-    const savedTransaction = localStorage.getItem("transactionList");
-    if (savedTransaction) {
-        transactionList = JSON.parse(savedTransaction);
-        addTransaction(new Event("dummy")); // Utilisez un événement fictif pour ajouter les transactions au DOM
+        const typeElement = document.createElement("span");
+        typeElement.textContent = transaction.type;
+        transactionType.appendChild(typeElement);
     }
 }
 
-function clearValues() {
-    input.forEach(input => (input.value = ""));
-}
+// Gère la soumission du formulaire de transaction
+transactionForm.addEventListener("submit", (event) => {
+    event.preventDefault();
 
+    // Récupère les valeurs du formulaire
+    const date = transactionForm.elements.date.value;
+    const amount = transactionForm.elements.amount.value;
+    const description = transactionForm.elements.description.value;
+    const type = transactionForm.elements.type.value;
+
+    // Crée une nouvelle transaction
+    const transaction = { date, amount, description, type };
+    addTransaction(transaction);
+
+    // Réinitialise le formulaire
+    transactionForm.reset();
+    toggleModal();
+});
+
+// Efface les éléments de transaction existants dans le DOM
 function clearTransactionElements() {
-    // Effacer tous les éléments enfants des conteneurs de transactions
-    transactionDate.innerHTML = "";
-    transactionAmount.innerHTML = "";
-    transactionDescription.innerHTML = "";
-    transactionType.innerHTML = "";
+    while (transactionDate.firstChild) {
+        transactionDate.firstChild.remove();
+    }
+
+    while (transactionAmount.firstChild) {
+        transactionAmount.firstChild.remove();
+    }
+
+    while (transactionDescription.firstChild) {
+        transactionDescription.firstChild.remove();
+    }
+
+    while (transactionType.firstChild) {
+        transactionType.firstChild.remove();
+    }
 }
 
+// Charge les transactions enregistrées au démarrage de la page
 loadTransactions();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

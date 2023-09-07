@@ -51,7 +51,6 @@ body{
     margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
     padding: 10px;
     background-color: white;
 }
@@ -199,4 +198,12 @@ input:focus{
 .submit-transaction:hover{
     background-color: darkgreen;
     transition: background-color 0.5s ease-out;
+}
+
+@media screen { 
+    .modal{
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    
 }
