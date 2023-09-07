@@ -6,7 +6,7 @@
 }
 
 body{
-    background-color: darkslategray;
+    background-color: rgb(75, 93, 93);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .main-page{
@@ -14,36 +14,22 @@ body{
     margin: auto;
 }
 
-.main-title{
-    margin-top: 50px;
-    font-size: 50px;
-    font-weight: 400;
-    border: 5px solid black;
-    padding: 10px;
-    background-color: black;
-    color: white;
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .account-info{
     margin: auto;
     margin-top: 20px;
     width: fit-content;
     text-align: left;
-    background: grey;
+    background: white;
     border-radius: 10px;
     padding: 10px;
     border: 2px solid black;
-    
 }
 .account-info p{
     font-size: 15px;
-    background: white;
     padding: 5px;
     width: fit-content;
     border-radius: 5px;
+    font-size: 30px;
 }
 
 .transactions-container{
@@ -53,12 +39,13 @@ body{
     margin-right: auto;
     padding: 10px;
     background-color: white;
+    width: fit-content;
 }
 
 .add-button{
     margin-top: 20px;
     margin-bottom: 20px;
-    background-color: darkslategray;
+    background-color: rgb(75, 93, 93);
     color: white;
     border: 2px solid black;
     padding: 10px;
@@ -72,9 +59,24 @@ body{
     color: white;
     transition: background-color 0.5s ease-out;
 }
+.delete-all{
+    margin-bottom: 10px;
+    background-color: #ff365e;
+    color: white;
+    border: 2px solid black;
+    padding: 10px;
+    font-size: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.5s ease-out;
+}
+.delete-all:hover{
+    background-color: darkred;
+    transition: background-color 0.5s ease-out;
+}
 .grid-transaction{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 0.5fr;
     border-bottom: 1px solid black;
     border-top: 1px solid black;
     padding: 10px;
@@ -85,12 +87,46 @@ body{
     border: 1px solid black;
 }
 
-.grid-transaction div span{
+.grid-transaction .bin-title{
+    background-color: transparent;
+    border: none;
+}
+.grid-transaction div{
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    padding: 5px;
+}
+.grid-transaction div .transaction-element{
     display: grid;
     border-bottom: 1px solid black;
+    border-top:1px solid black;
     text-align: center;
     margin: auto;
     width: fit-content;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+    height: 34px;
+}
+
+.grid-transaction div .bin-element{
+    color: white;
+    background-color: #ff365e;
+    border-radius: 5px;
+    padding: 5px;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.1s;
+    display: grid;
+    height: 34px;
+    width: fit-content;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+}
+.grid-transaction .bin-element:hover{
+    transition: all 0.2s ease-in-out;
+    background-color: darkred;
 }
 
 .modal-container{
@@ -155,6 +191,11 @@ body{
     cursor: pointer;
     background: #ff365e;
     color: #fff;
+    transition: background-color 0.5s ease-out;
+}
+.close-modal:hover{
+    background: darkred;
+    transition: background-color 0.5s ease-out;
 }
 form{
     display: flex;
@@ -198,12 +239,4 @@ input:focus{
 .submit-transaction:hover{
     background-color: darkgreen;
     transition: background-color 0.5s ease-out;
-}
-
-@media screen { 
-    .modal{
-        top: 50%;
-        transform: translate(-50%, -50%);
-    }
-    
 }
