@@ -10,21 +10,30 @@ const modalTriggers = document.querySelectorAll(".modal-trigger");
 const balance = document.querySelector(".balance-amount");
 const transactionBin = document.querySelector(".transaction-bin");
 const deleteAllButton = document.querySelector(".delete-all");
+
 let balanceAmount = 0;
 
 transactionBin.addEventListener("click", (event) => {
     const binElement = event.target;
     const transactionId = binElement.id;
-    const elemDelete = transactions.splice(transactionId, 1)[0].amount;
-    balanceAmount -= parseFloat(elemDelete);
-    if (balanceAmount >= 0) {
-        balance.textContent = `${balanceAmount.toFixed(2)}€`;
-    } else {
-        balance.textContent = `-${balanceAmount.toFixed(2)}€`;
+    const transactionIndex = transactions.findIndex(transaction => transaction.id === parseInt(transactionId));
+    if (transactionIndex !== -1) {
+        const removedTransaction = transactions.splice(transactionIndex, 1)[0];
+        balanceAmount -= parseFloat(removedTransaction.amount);
+        if (balanceAmount >= 0) {
+            balance.textContent = `${balanceAmount.toFixed(2)}€`;
+        } else {
+            balance.textContent = `-${Math.abs(balanceAmount).toFixed(2)}€`;
+        }
+
+        const transactionElements = document.querySelectorAll(`[id="${transactionId}"]`);
+        for (const transactionElement of transactionElements) {
+            transactionElement.remove();
+        }
+
+        saveTransactions();
+        renderTransactions();
     }
-    binElement.remove();
-    saveTransactions();
-    renderTransactions();
 });
 
 
@@ -59,6 +68,7 @@ function loadTransactions() {
         balanceAmount += parseFloat(transaction.amount);
 
         const binElement = document.createElement("span");
+        binElement.setAttribute("id", transaction.id);
         binElement.classList= "bin-element"
         binElement.textContent = "Delete";
         transactionBin.appendChild(binElement);
@@ -66,7 +76,7 @@ function loadTransactions() {
     if (balanceAmount >= 0) {
         balance.textContent = `${balanceAmount.toFixed(2)}€`;
     } else {
-        balance.textContent = `-${balanceAmount.toFixed(2)}€`;
+        balance.textContent = `${balanceAmount.toFixed(2)}€`;
     }
 }
 
@@ -111,11 +121,10 @@ function renderTransactions() {
         transactionType.appendChild(typeElement);
 
         // donnez une id à chaque transaction
-        const transactionId = transactions.indexOf(transaction);
-        dateElement.setAttribute("id", transactionId);
-        amountElement.setAttribute("id", transactionId);
-        descriptionElement.setAttribute("id", transactionId);
-        typeElement.setAttribute("id", transactionId);
+        dateElement.setAttribute("id", transaction.id);
+        amountElement.setAttribute("id", transaction.id);
+        descriptionElement.setAttribute("id", transaction.id);
+        typeElement.setAttribute("id", transaction.id);
     }
 }
 
@@ -128,21 +137,22 @@ transactionForm.addEventListener("submit", (event) => {
     const amount = transactionForm.elements.amount.value;
     const description = transactionForm.elements.description.value;
     const type = transactionForm.elements.type.value;
-    
+    const id = transactions.length;
+
     balanceAmount += parseFloat(amount);
     if (balanceAmount >= 0) {
         balance.textContent = `${balanceAmount.toFixed(2)}€`;
     } else {
-        balance.textContent = `-${balanceAmount.toFixed(2)}€`;
+        balance.textContent = `${balanceAmount.toFixed(2)}€`;
     }
 
     // Crée une nouvelle transaction
-    const transaction = { date, amount, description, type};
+    const transaction = {date, amount, description, type, id};
     
     addTransaction(transaction);
 
     const binElement = document.createElement("span");
-    binElement.setAttribute("id", transactions.indexOf(transaction));
+    binElement.setAttribute("id", transaction.id);
     binElement.classList= "bin-element"
     binElement.textContent = "Delete";
     transactionBin.appendChild(binElement);
