@@ -3,21 +3,21 @@
     padding: 0;
     box-sizing: border-box;
     font-weight: 350;
-    --taille-max: 100%;
+    
 }
 
 body{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    max-height:var(--taille-max) ;
+    height: 100vh;
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
-    background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5));
+    background:linear-gradient(145deg,rgb(109, 109, 255),purple);
 }
 .main-page{
     padding-top:30px ;
     text-align: center;
     margin: 0;
+    height: 100%;
 }
 
 
@@ -25,13 +25,14 @@ body{
     margin: auto;
     width: fit-content;
     text-align: left;
-    background: white;
+    background: rgb(21, 32, 43);
     border-radius: 10px;
     padding: 10px;
-    border: 2px solid black;
-    /* animation: slideIn 1.5s ease-in-out, opacity 2s ease-in-out; */
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    
 }
 .account-info p{
+    color: white;
     padding: 5px;
     width: fit-content;
     border-radius: 5px;
@@ -39,12 +40,13 @@ body{
 }
 
 .transactions-container{
+    color: #fefefe;
     border-radius: 10px;
     padding: 10px;
     margin-top: 30px;
     margin-left: auto;
     margin-right: auto;
-    background-color: white;
+    background-color: rgb(21, 32, 43);
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
     width: fit-content;
     /* animation: slideIn 1.5s ease-in-out, opacity 2s ease-in-out; */
@@ -53,9 +55,10 @@ body{
 .add-button{
     margin-top: 20px;
     margin-bottom: 20px;
-    background-color: rgb(75, 93, 93);
+    background-color: green;
     color: white;
-    border: 2px solid black;
+    border: none;
+    box-shadow: 0px 0px 5px green;
     padding: 10px;
     font-size: 20px;
     cursor: pointer;
@@ -63,20 +66,22 @@ body{
     transition: background-color 0.5s ease-out;
 }
 .add-button:hover{
-    background-color: black;
+    background-color: rgb(109, 109, 255);
     color: white;
-    transition: background-color 0.5s ease-out;
+    transition: all 0.5s ease-out;
+    box-shadow: 0px 0px 5px rgb(109, 109, 255);
 }
 .delete-all{
     margin-bottom: 10px;
-    background-color: #ff365e;
+    background: #ff365e;
     color: white;
-    border: 2px solid black;
     padding: 10px;
     font-size: 10px;
     cursor: pointer;
     border-radius: 5px;
+    border: none;
     transition: background-color 0.5s ease-out;
+    box-shadow: 0px 0px 5px #ff365e;
 }
 .delete-all:hover{
     background-color: darkred;
@@ -90,10 +95,18 @@ body{
     padding: 10px;
 }
 .grid-transaction .transaction-title{
-    background-color: lightgray;
+    font-weight: 50px;
+    background: rgb(21, 32, 43);
     padding: 5px;
-    border: 1px solid black;
-    box-shadow: 0px 0px 3px rgba(0,0,0,0.75);
+    border: 1px solid gray;
+    box-shadow: 0px 0px 3px gray;
+}
+
+.bin-title{
+    color: gray;
+    /* Appliquer des rayures */
+    background-image: repeating-linear-gradient(45deg, rgb(61, 59, 59), rgb(61, 59, 59) 3px, transparent 3px, transparent 7px);
+    background-size: 10px 10px;
 }
 
 .grid-transaction div{
@@ -102,8 +115,8 @@ body{
 }
 .grid-transaction div .transaction-element{
     display: grid;
-    border-bottom: 1px solid black;
-    border-top:1px solid black;
+    border-bottom: 1px solid #fefefe;
+    border-top:1px solid #fefefe;
     text-align: center;
     margin: auto;
     width: fit-content;
@@ -127,7 +140,7 @@ body{
     display: grid;
     height: 34px;
     width: fit-content;
-    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 5px 0px #ff365e;
 }
 .grid-transaction .bin-element:hover{
     transition: all 0.2s ease-in-out;
@@ -135,6 +148,7 @@ body{
 }
 
 .modal-container{
+    color: #fefefe;
     visibility: hidden;
     position: fixed;
     top: 0;
@@ -167,7 +181,7 @@ body{
     max-width: 500px;
     min-width: 300px;
     padding: 30px;
-    background: #fff;
+    background: rgb(21, 32, 43);
     border-radius: 5px;
     position: absolute;
     top: 40%;
@@ -177,7 +191,7 @@ body{
 }
 .modal-title{
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 400;
     margin-bottom: 10px;
 }
 .modal-container.active .modal{
@@ -213,6 +227,7 @@ form{
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    box-shadow: 0px 0px 3px 0px #ccc;
     font-size: 16px;
     outline: none;
 }
@@ -238,6 +253,7 @@ input:focus{
     outline: none;
     cursor: pointer;
     background: green;
+    box-shadow: 0px 0px 5px green;
     color: #fff;
     transition: background-color 0.5s ease-out;
 }
@@ -247,30 +263,3 @@ input:focus{
 }
 
 /* Animations */
-
-@keyframes opacity {
-    from{
-        opacity: 0;
-    }
-    to{
-        opacity: 1;
-    }
-}
-
-@keyframes slideIn1 {
-    from{
-        transform: translateY(100%);
-    }
-    to{
-        transform: translateY(0%);
-    }
-}
-
-@keyframes slideIn {
-    from{
-        transform: translateY(200%);
-    }
-    to{
-        transform: translateY(0%);
-    }
-}
