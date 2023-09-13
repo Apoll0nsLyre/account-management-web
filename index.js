@@ -10,7 +10,9 @@ const modalTriggers = document.querySelectorAll(".modal-trigger");
 const balance = document.querySelector(".balance-amount");
 const transactionBin = document.querySelector(".transaction-bin");
 const deleteAllButton = document.querySelector(".delete-all");
-
+const menuButton = document.querySelector("#menu-button");
+const menuContainer = document.querySelectorAll(".menu");
+const overlayMenu = document.querySelector(".overlay-menu");
 let balanceAmount = 0;
 
 transactionBin.addEventListener("click", (event) => {
@@ -54,6 +56,14 @@ modalTriggers.forEach(trigger => trigger.addEventListener("click", toggleModal))
 function toggleModal() {
     modalContainer.classList.toggle("active");
 }
+
+menuButton.addEventListener("click" , () => {
+    menuContainer.forEach(container => container.classList.toggle("active"));
+});
+
+menuButton.addEventListener("click" , () => {
+    overlayMenu.classList.toggle("active");
+});
 
 let transactions = [];
 

@@ -1,0 +1,104 @@
+.header-menu{
+    color: white;
+    display: flex;
+    position: fixed;
+    width: 100%;
+    height: 60px;
+    background:rgb(21, 32, 43);
+    z-index: 3;
+}
+.header-menu p{
+    margin: auto;
+}
+.menu-page{
+    overflow: hidden;
+    background-color: rgb(21, 32, 43);
+    position: relative;
+    top: 0;
+    left: 0;
+}
+.overlay-menu{
+    opacity: 0;
+    visibility: hidden;
+    position:fixed;
+    margin-top: 60px;
+    width: 150%;
+    height: 100vh;
+    background:#333333d3; 
+    transition: opacity 0.7s ease-out, visibility 0.7s ease-out;
+}
+.overlay-menu.active{
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.7s 0.3s ease-out, visibility 0.7s 0.3s ease-out;
+    z-index: 0;
+}
+.menu{
+    visibility: hidden;
+    position: fixed;
+    margin-top:60px;
+    background: rgb(21, 32, 43);
+    width: 60%;
+    min-height: 100vh;
+    height: 100%;
+    transition: visibility 0.7s;
+    animation: slideOut 0.7s ease-out;
+    z-index: 3;
+    overflow: hidden;
+}
+.menu.active{
+    position: fixed;
+    visibility: visible;
+    animation: slideIn 0.7s ease-in-out;
+}
+
+.menu-page a{
+    position: relative;
+    color: white;
+    padding: 15px 15px;
+    text-decoration: none;
+    font-size: 17px;
+    display: block;
+    text-align: center;
+    transition: background-color 0.7s ease-out, color 0.7s ease-out;
+}
+.menu-page p{
+    padding: 15px 15px;
+    text-decoration: none;
+    font-size: 17px;
+    display: block;
+    text-align: center;
+}
+.menu-container a:hover{
+    background-color: #ddd;
+    color: black;
+    transition: background-color 0.7s ease-out, color 0.7s ease-out;
+}
+#menu-button{
+    height: 60px !important;
+}
+.menu-page a#menu-button {
+    background: rgb(21, 32, 43);
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 25px;
+    height: auto;
+    width: auto;
+}
+#close-menu-button{
+    background: rgb(21, 32, 43);
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 25px;
+    height: auto;
+    width: auto;
+}
+.menu-page #menu-button:hover{
+    background-color: rgb(21, 32, 43);
+    color: white;
+    cursor: pointer;
+}

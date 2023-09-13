@@ -5,15 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="modal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="index.js" defer></script>
     <title>Management webapp</title>
 </head>
 
 <body>
+    <div class="menu-page">
+        <header class="header-menu">
+        <p>Management WebApp</p>
+        <a class="fa fa-bars menu-trigger" id="menu-button" ></a>
+        </header>
+        <div class="menu-container">
+            <div class="overlay-menu"></div> 
+            <div class="menu">
+                <div class="menu-item menu-trigger">
+                    <a href="#transactions">Transactions</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="main-page">
             <div class="account-container">
-
-
                 <div class="account">
                     <div class="account-info">
                         <p class="balance">Balance: <span class="balance-amount"></span></p>

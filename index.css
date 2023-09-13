@@ -9,257 +9,40 @@
 body{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     height: 100vh;
+    width: 100%;
     margin: 0;
     padding: 0;
-    background:linear-gradient(145deg,rgb(109, 109, 255),purple);
-}
-.main-page{
-    padding-top:30px ;
-    text-align: center;
-    margin: 0;
-    height: 100%;
+    background:linear-gradient(120deg,rgb(175, 175, 255),rgb(109, 109, 255),purple,purple,rgb(109, 109, 255),rgb(175, 175, 255));
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
 }
 
-
-.account-info{
-    margin: auto;
-    width: fit-content;
-    text-align: left;
-    background: rgb(21, 32, 43);
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
-    
-}
-.account-info p{
-    color: white;
-    padding: 5px;
-    width: fit-content;
-    border-radius: 5px;
-    font-size: 30px;
+@keyframes slideIn {
+    0%{
+        transform: translateX(-100%);
+    }
+    100%{
+        transform: translateX(0%);
+    }
 }
 
-.transactions-container{
-    color: #fefefe;
-    border-radius: 10px;
-    padding: 10px;
-    margin-top: 30px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: rgb(21, 32, 43);
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
-    width: fit-content;
-    /* animation: slideIn 1.5s ease-in-out, opacity 2s ease-in-out; */
+@keyframes slideOut {
+    0%{
+        transform: translateX(0%);
+    }
+    100%{
+        transform: translateX(-100%);
+    }
 }
 
-.add-button{
-    margin-top: 20px;
-    margin-bottom: 20px;
-    background-color: green;
-    color: white;
-    border: none;
-    box-shadow: 0px 0px 5px green;
-    padding: 10px;
-    font-size: 20px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.5s ease-out;
+@keyframes gradient {
+	0% {
+		background-position: 0 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0 50%;
+	}
 }
-.add-button:hover{
-    background-color: rgb(109, 109, 255);
-    color: white;
-    transition: all 0.5s ease-out;
-    box-shadow: 0px 0px 5px rgb(109, 109, 255);
-}
-.delete-all{
-    margin-bottom: 10px;
-    background: #ff365e;
-    color: white;
-    padding: 10px;
-    font-size: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    border: none;
-    transition: background-color 0.5s ease-out;
-    box-shadow: 0px 0px 5px #ff365e;
-}
-.delete-all:hover{
-    background-color: darkred;
-    transition: background-color 0.5s ease-out;
-}
-.grid-transaction{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 0.5fr;
-    border-bottom: 1px solid black;
-    border-top: 1px solid black;
-    padding: 10px;
-}
-.grid-transaction .transaction-title{
-    font-weight: 50px;
-    background: rgb(21, 32, 43);
-    padding: 5px;
-    border: 1px solid gray;
-    box-shadow: 0px 0px 3px gray;
-}
-
-.bin-title{
-    color: gray;
-    /* Appliquer des rayures */
-    background-image: repeating-linear-gradient(45deg, rgb(61, 59, 59), rgb(61, 59, 59) 3px, transparent 3px, transparent 7px);
-    background-size: 10px 10px;
-}
-
-.grid-transaction div{
-    grid-template-columns: 1fr 1fr 1fr 1fr ;
-    padding: 5px;
-}
-.grid-transaction div .transaction-element{
-    display: grid;
-    border-bottom: 1px solid #fefefe;
-    border-top:1px solid #fefefe;
-    text-align: center;
-    margin: auto;
-    width: fit-content;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    padding: 5px;
-    height: 34px;
-}
-
-.grid-transaction div .bin-element{
-    color: white;
-    background-color: #ff365e;
-    border-radius: 5px;
-    padding: 5px;
-    margin: auto;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    -webkit-transition: all 0.1s;
-    display: grid;
-    height: 34px;
-    width: fit-content;
-    box-shadow: 0px 0px 5px 0px #ff365e;
-}
-.grid-transaction .bin-element:hover{
-    transition: all 0.2s ease-in-out;
-    background-color: darkred;
-}
-
-.modal-container{
-    color: #fefefe;
-    visibility: hidden;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    transition: visibility 0.5s ;
-}
-
-.modal-container.active{
-    visibility: visible;
-}
-
-.overlay{
-    opacity: 0;
-    position:absolute;
-    width: 100%;
-    height: 100%;
-    background:#333333d3; 
-    transition: opacity 0.4s 0.2s ease-out;
-}
-.modal-container.active .overlay{
-    opacity: 1;
-    transition: opacity 0.4s ease-out;
-}
-
-.modal{
-    opacity: 0;
-    width: 95%;
-    max-width: 500px;
-    min-width: 300px;
-    padding: 30px;
-    background: rgb(21, 32, 43);
-    border-radius: 5px;
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transition: opacity 0.4s ease-out;
-}
-.modal-title{
-    font-size: 20px;
-    font-weight: 400;
-    margin-bottom: 10px;
-}
-.modal-container.active .modal{
-    opacity: 1;
-    transition: opacity 0.4s 0.2s ease-out;
-}
-
-.close-modal{
-    padding: 8px 10px;
-    border: none;
-    border-radius:5px ;
-    font-size: 18px;
-    position: absolute;
-    top: 10px;
-    right:10px;
-    cursor: pointer;
-    background: #ff365e;
-    color: #fff;
-    transition: background-color 0.5s ease-out;
-}
-.close-modal:hover{
-    background: darkred;
-    transition: background-color 0.5s ease-out;
-}
-form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.modal-input{
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0px 0px 3px 0px #ccc;
-    font-size: 16px;
-    outline: none;
-}
-input{
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    outline: none;
-    padding: 5px;
-}
-label{
-    text-align: left;
-}
-input:focus{
-    border: 1px solid #ff365e;
-}
-.submit-transaction{
-    border: none;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    outline: none;
-    cursor: pointer;
-    background: green;
-    box-shadow: 0px 0px 5px green;
-    color: #fff;
-    transition: background-color 0.5s ease-out;
-}
-.submit-transaction:hover{
-    background-color: darkgreen;
-    transition: background-color 0.5s ease-out;
-}
-
-/* Animations */
