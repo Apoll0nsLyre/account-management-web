@@ -26,11 +26,11 @@
 }
 .modal-container.active .overlay{
     opacity: 1;
-    transition: opacity 1s 0.3s ease-out;
+    transition: opacity 0.7s  ease-out;
 }
 .modal-container.active .modal{
     opacity: 1;
-    transition: opacity 1s 0.3s ease-out;
+    transition: opacity 0.7s  ease-out;
 }
 
 .modal{

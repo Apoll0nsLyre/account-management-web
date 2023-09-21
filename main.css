@@ -3,6 +3,7 @@
     text-align: center;
     margin: 0;
     height: 100%;
+    transition: visibility 0.5s 0.5s ease-out, opacity 0.5s 0.5s ease-out;
 }
 
 .account-info{

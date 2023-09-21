@@ -6,16 +6,23 @@
     height: 60px;
     background:rgb(21, 32, 43);
     z-index: 3;
+    box-shadow: 0px 5px 10px -5px rgb(21, 32, 43);
 }
 .header-menu p{
+    position: absolute;
     margin: auto;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
 }
+
 .menu-page{
     overflow: hidden;
     background-color: rgb(21, 32, 43);
     position: relative;
     top: 0;
     left: 0;
+    transition: visibility 0.5s 0.5s ease-out, opacity 0.5s 0.5s ease-out;
 }
 .overlay-menu{
     opacity: 0;
@@ -50,6 +57,7 @@
     position: fixed;
     visibility: visible;
     animation: slideIn 0.7s ease-in-out;
+    box-shadow: 5px 0 5px -5px rgb(21, 32, 43);
 }
 
 .menu-page a{
@@ -101,4 +109,26 @@
     background-color: rgb(21, 32, 43);
     color: white;
     cursor: pointer;
+}
+
+#home-button{
+    background: rgb(21, 32, 43);
+    position: absolute;
+    right: 20px;
+    justify-content: center;
+    text-align: center;
+    text-shadow: none;
+    transition: all 0.5s ease-out;
+}
+#home-button:hover{
+    text-shadow: 0px 0px 10px white;
+    cursor: pointer;
+    transition: all 0.5s ease-out;
+}
+#home-button *{
+    background: rgb(21, 32, 43);
+    position: absolute;
+    margin-left: 5px;
+    justify-content: center;
+    text-align: center;
 }
